@@ -7,6 +7,10 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="commons-math3-3.0.jar"/>
-	<classpathentry kind="lib" path="encog-core-3.3.0.jar"/>
+	<classpathentry kind="lib" path="encog-core-3.3.0.jar" sourcepath="java">
+		<attributes>
+			<attribute name="javadoc_location" value="file:/D:/Estudios/2_Curso/209-AI/labPr/IS_LabProject01/apidocs/"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
