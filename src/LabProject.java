@@ -18,9 +18,6 @@ public class LabProject {
 
 	public static void main(String[] args) {
 
-		// List<Point> training = new ArrayList<Point>();
-		// List<Point> validation = new ArrayList<Point>();
-
 		double[][] trainingX = new double[1000][2];
 		double[][] trainingY = new double[1000][1];
 
@@ -40,14 +37,7 @@ public class LabProject {
 			validationX[i][1] = y1;
 			validationY[i][0] = getF(x1, y1);
 		}
-		
-		/*
-		 * System.out.println("Printing an array"); for(int i = 0; i< 10; i++) {
-		 * System.out.print("X: "); for (int j = 0; j<2; j++) {
-		 * System.out.printf("%f\t",trainingX[i][j]); } System.out.printf("Y: %f\n",
-		 * trainingY[i][0]); }
-		 */
-
+		int MAX_ITERATIONS = 100;
 		int numOfHiddenNeurons = 10;
 		BasicNetwork neuronalNetwork = new BasicNetwork();
 		neuronalNetwork.addLayer(new BasicLayer(new ActivationSigmoid(), true, 2));
@@ -57,19 +47,24 @@ public class LabProject {
 		neuronalNetwork.reset();
 
 		MLDataSet trainingSet = new BasicMLDataSet(trainingX, trainingY);
-		
+
 		Backpropagation train = new Backpropagation(neuronalNetwork, trainingSet);
-		train.iteration(50000);
-		System.out.println( train.getError());
+		for(int i = 0; i<MAX_ITERATIONS ; i++) {
+			train.iteration();
+			System.out.println ("Error " + train.getError());
+		}
+		
 		System.out.println("done");
+		train.finishTraining();
+		
+		
 		
 		/*
-		for(MLDataPair pair : trainingSet) {
-			MLData result = neuronalNetwork.compute(pair.getInput());
-			double[] in = pair.getInputArray();
-			System.out.printf("%f\t%f\tidl: %f\tout: %f\n", in[0], in[1], pair.getIdealArray()[0], result.getData()[0]);
-		}
-		*/
+		 * for(MLDataPair pair : trainingSet) { MLData result =
+		 * neuronalNetwork.compute(pair.getInput()); double[] in = pair.getInputArray();
+		 * System.out.printf("%f\t%f\tidl: %f\tout: %f\n", in[0], in[1],
+		 * pair.getIdealArray()[0], result.getData()[0]); }
+		 */
 	}
 
 	public static double getF(double x, double y) {
