@@ -87,8 +87,10 @@ public class DataProcessing {
 				for (int j = 0; j < 100; j++) {
 					x += step;
 					/*
-					 * //In case I want to generate directly testX[i * 100 + j][0] = x; testX[i *
-					 * 100 + j][1] = y; testY[i * 100 + j][0] = getF(x, y);
+					 * //In case I want to generate directly 
+					 * testX[i * 100 + j][0] = x; 
+					 * testX[i * 100 + j][1] = y; 
+					 * testY[i * 100 + j][0] = getF(x, y);
 					 */
 					writer.printf("%f,%f,%f\n", x, y, getF(x, y));
 				}
