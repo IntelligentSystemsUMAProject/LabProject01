@@ -3,7 +3,6 @@ package methods;
 import org.encog.engine.network.activation.ActivationElliottSymmetric;
 import org.encog.engine.network.activation.ActivationFunction;
 import org.encog.engine.network.activation.ActivationLOG;
-import org.encog.engine.network.activation.ActivationLinear;
 import org.encog.ml.data.MLData;
 import org.encog.ml.data.MLDataPair;
 import org.encog.ml.data.basic.BasicMLData;
@@ -33,8 +32,9 @@ public class NeuralNetwork {
 		BasicNetwork neuralNetwork = new BasicNetwork();
 		ActivationFunction af = getAF(activationFunction);
 
-		neuralNetwork.addLayer(new BasicLayer(new ActivationLinear(), false, 2));
+		neuralNetwork.addLayer(new BasicLayer(null, false, 2));
 		if (numOfHiddenNeurons > 0) {
+			neuralNetwork.addLayer(new BasicLayer(af, true, numOfHiddenNeurons));
 			neuralNetwork.addLayer(new BasicLayer(af, true, numOfHiddenNeurons));
 		}
 		neuralNetwork.addLayer(new BasicLayer(af, true, 1));
@@ -95,8 +95,6 @@ public class NeuralNetwork {
 			MLDataPair pair = new BasicMLDataPair(new BasicMLData(validationX[i]), new BasicMLData(validationY[i]));
 			MLData result = neuralNetwork.compute(pair.getInput());
 			error += Math.pow((result.getData(0) - pair.getIdealArray()[0]), 2);
-//			double[] in = pair.getInputArray();
-//			System.out.printf("%f\t%f\tidl: %f\tout: %f\n", in[0], in[1],pair.getIdealArray()[0], result.getData(0)); 
 		}
 		return error / validationX.length;
 	}

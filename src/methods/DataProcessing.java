@@ -81,17 +81,12 @@ public class DataProcessing {
 		double x = initX;
 		double y = initY;
 		try (PrintWriter writer = new PrintWriter(new File("test.csv"))) {
+			writer.printf("sep=,\n");
 			writer.printf("x1,x2,f\n");
 			for (int i = 0; i < 100; i++) {
 				y += step;
 				for (int j = 0; j < 100; j++) {
 					x += step;
-					/*
-					 * //In case I want to generate directly 
-					 * testX[i * 100 + j][0] = x; 
-					 * testX[i * 100 + j][1] = y; 
-					 * testY[i * 100 + j][0] = getF(x, y);
-					 */
 					writer.printf("%f,%f,%f\n", x, y, getF(x, y));
 				}
 				x = initX;
@@ -111,6 +106,7 @@ public class DataProcessing {
 	 */
 	private static void generateDataAndSaveToFile(String filename) {
 		try (PrintWriter writer = new PrintWriter(new File(filename))) {
+			writer.printf("sep=,\n");
 			writer.printf("x1,x2,f\n");
 			for (int i = 0; i < 1000; i++) {
 				double x = Math.random() * (PI + PI) - PI;
@@ -134,4 +130,5 @@ public class DataProcessing {
 	private static double getF(double x, double y) {
 		return (Math.sin(x) * Math.cos(y));
 	}
+
 }
