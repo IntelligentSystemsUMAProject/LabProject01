@@ -40,7 +40,7 @@ public class LabProject {
 		double[][] testX = data[4];
 		double[][] testY = data[5];
 
-		PrintWriter consoleOutput = new PrintWriter(new File("ConsoleOutput.txt"));
+		PrintWriter consoleOutput = new PrintWriter(new File("output.txt"));
 
 		if (iWantToGenerateDataForDrawGraphics) {
 			// We training neural network with different number of neuron in hidden layer
